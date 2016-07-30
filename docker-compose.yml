@@ -1,0 +1,74 @@
+version: '2'
+
+networks:
+    # local network
+    local:
+        external: true
+
+    # Internal & Stub
+    default:
+
+services:
+    app:
+        image: php-fpm
+        ports:
+            - "9001:9000"
+        networks:
+            local:
+                aliases:
+                    - app
+            default:
+                aliases:
+                    - app.local
+        volumes:
+            - ".:/var/www/app"
+            - "~/.composer:/var/www/.composer"
+        depends_on:
+            - db
+
+    web:
+        image: nginx
+        ports:
+            - "8001:80"
+        networks:
+            local:
+                aliases:
+                    - events
+            default:
+                aliases:
+                    - web.local
+        environment:
+            - FPM_HOST=app
+        depends_on:
+            - app
+        volumes_from:
+            - app
+        volumes:
+            - ./var/logs/nginx:/var/log/nginx
+
+    db:
+        image: postgres:9.5
+        ports:
+            - "5433:5432"
+        networks:
+            local:
+                aliases:
+                    - db
+            default:
+                aliases:
+                    - db.local
+        volumes:
+            - ./containers/db:/usr/local/src
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        networks:
+            local:
+                aliases:
+                    - rabbitmq
+            default:
+                aliases:
+                    - rabbitmq.local

@@ -1,0 +1,14 @@
+paths:
+    migrations: migrations
+
+environments:
+    default_migration_table: phinxlog
+    default_database: generic
+    generic:
+        adapter: pgsql
+        host: %%BDD_EVENTS_HOST%%
+        port: %%BDD_EVENTS_PORT%%
+        name: %%BDD_EVENTS_NAME%%
+        user: %%BDD_EVENTS_USER%%
+        pass: %%BDD_EVENTS_PASSWORD%%
+        charset: utf8

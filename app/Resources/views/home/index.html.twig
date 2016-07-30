@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% set links_menu = [
+        { title: 'link.applications'|trans, path: path('app_applications') },
+        { title: 'link.events'|trans, path: path('app_events') },
+        { title: 'link.messages'|trans, path: path('app_messages') },
+    ]
+%}
+
+{% block body %}{% endblock %}

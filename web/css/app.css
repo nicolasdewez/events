@@ -1,0 +1,32 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 55px 15px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.clear {
+    clear: both;
+}
+
+.breadcrumb {
+    background: none;
+    margin-bottom: 8px;
+}
+
+.detailsElement,
+table:hover > tbody > tr.detailsElement:hover {
+    background: #5e5e5e;
+    color: #ffffff;
+}
+
+.partial {
+    color:#5e5e5e;
+}

@@ -1,0 +1,57 @@
+form:
+    username: Nom d'utilisateur
+    password: Mot de passe
+    connection: Se connecter
+    save: Enregistrer
+    search: Rechercher
+    code: Code
+    url: Url
+    title: Libellé
+    active_m: Actif
+    active_f: Active
+    events_type: Type d'événements
+    asynchronous: Asynchrone (Queuing)
+    synchronous: Synchrone (API)
+    state:
+        no_applications: no_applications
+        partial: partial
+        sent: sent
+        error: error
+
+link:
+    logout: Se déconnecter
+    applications: Applications
+    events: Evénements
+    messages: Messages
+    application_add: Ajouter une application
+    event_add: Ajouter un événement
+
+table:
+    no_element: Aucun élément
+    actions: Actions
+    id: Id
+    code: Code
+    date: Date
+    event: Evénement
+    state: Etat
+    details: Détails
+    title: Libellé
+    active_m: Actif
+    active_f: Active
+    number_applications: Applications (nb)
+    events_type: Type d'événements
+    asynchronous: Asynchrone (Queuing)
+    synchronous: Synchrone (API)
+
+breadcrumb:
+    home: Accueil
+    applications: Applications
+    events: Evénements
+    messages: Messages
+    add: Ajouter
+
+notice:
+    application_added: Application ajoutée
+    application_updated: Application modifiée
+    event_added: Evénement ajouté
+    event_updated: Evénement modifié

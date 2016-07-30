@@ -1,0 +1,89 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: di/breadcrumb.xml }
+    - { resource: di/listeners.xml }
+    - { resource: di/services.xml }
+    - { resource: di/twig.xml }
+
+parameters:
+    locale: en
+    app_name: "Events"
+    app_version: "0.1.0"
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+monolog:
+    channels: ['send', 'admin']
+
+# Twig Configuration
+twig:
+    form_theme:
+        - "bootstrap_3_layout.html.twig"
+        - "theme/collection.html.twig"
+    globals:
+        app_name: "%app_name%"
+        app_version: "%app_version%"
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_pgsql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+finite_finite:
+    message:
+        class: AppBundle\Entity\Message
+
+        states:
+            ready: { type: initial }
+            sent: { type: final }
+            no_applications: { type: normal }
+            partial_sent: { type: normal }
+            error: { type: normal }
+
+        transitions:
+            send: { from: [ready], to: sent }                                     # Sent
+            send_error: { from: [ready, partial_sent], to: error }                # Not sent (all missing)
+            send_partial: { from: [ready, partial_sent], to: partial_sent }       # Sent but missing
+            send_no_applications: { from: [ready], to: no_applications }          # Not sent (no applications)
+            new_try: { from: [partial_sent, error, no_applications], to: ready }  # New try, set to ready
+            resend: { from: [partial_sent, error, no_applications], to: sent }    # Resend to all
+            missing_send: { from: [partial_sent], to: sent }                      # Resend to missing
+
+# TO Delete
+ndewez_events:
+    mode: asynch

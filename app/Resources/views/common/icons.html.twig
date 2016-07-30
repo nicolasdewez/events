@@ -1,0 +1,60 @@
+{% macro boolean (state) %}
+    {% if state %}
+        <span class="glyphicon glyphicon-ok"></span>
+    {% else %}
+        <span class="glyphicon glyphicon-remove"></span>
+    {% endif %}
+{% endmacro %}
+
+{% macro link (href, rel, class, target, title, collapse_id) %}
+    <a href="{{ href|default('#') }}" rel="{{ rel|default('') }}" title="{{ title|default('') }}" target="{{ target|default('_self') }}"><span class="{{ class|default('') }}"></span>{% if title is defined %} {{ title }}{% endif %}</a>
+{% endmacro %}
+
+{% macro view (path, target, title) %}
+    {% import _self as icons %}
+    {{ icons.link(path, null, 'glyphicon glyphicon-search', target, title) }}
+{% endmacro %}
+
+{% macro delete (title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, null, 'glyphicon glyphicon-trash', null, title) }}
+{% endmacro %}
+
+{% macro add (title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, null, 'glyphicon glyphicon-plus', null, title) }}
+{% endmacro %}
+
+{% macro up(title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, null, 'glyphicon glyphicon-arrow-up', null, title) }}
+{% endmacro %}
+
+{% macro down(title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, null, 'glyphicon glyphicon-arrow-down', null, title) }}
+{% endmacro %}
+
+{% macro edit(rel, title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, rel, 'glyphicon glyphicon-pencil', null, title) }}
+{% endmacro %}
+
+{% macro resend(rel, title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, rel, 'glyphicon glyphicon-repeat resend', null, title) }}
+{% endmacro %}
+
+{% macro missing_send(rel, title) %}
+    {% import _self as icons %}
+    {{ icons.link(null, rel, 'glyphicon glyphicon-repeat resend', null, title) }}
+{% endmacro %}
+
+{% macro collapse (collapse_id, class, title) %}
+    <a data-toggle="collapse" data-target="{{ collapse_id|default('') }}"><span class="{{ class|default('') }}"></span>{% if title is defined %} {{ title }}{% endif %}</a>
+{% endmacro %}
+
+{% macro details(collapse_id) %}
+    {% import _self as icons %}
+    {{ icons.collapse(collapse_id, 'glyphicon glyphicon-search') }}
+{% endmacro %}

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app.listener.breadcrumb" class="AppBundle\EventListener\BreadcrumbListener">
+            <argument>%breadcrumb%</argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
+        <service id="app.listener.command_dispatch" class="AppBundle\EventListener\ConsoleExceptionListener">
+            <argument type="service" id="logger"/>
+            <tag name="kernel.event_listener" event="console.exception" />
+        </service>
+
+        <service id="app.listener.admin" class="AppBundle\EventListener\AdminListener">
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="admin" />
+            <tag name="kernel.event_listener" event="kernel.request" />
+        </service>
+
+        <service id="app.listener.admin_entity" class="AppBundle\EventListener\AdminEntityListener">
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="admin" />
+            <tag name="doctrine.event_listener" event="onFlush" />
+        </service>
+    </services>
+
+</container>

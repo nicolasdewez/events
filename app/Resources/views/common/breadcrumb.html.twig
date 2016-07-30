@@ -1,0 +1,25 @@
+{% if app.session.get('breadcrumb')|length %}
+    <ol class="breadcrumb">
+        {% for element in app.session.get('breadcrumb') %}
+        <li{% if element.active %} class="active"{% endif %}>
+
+            {% if not element.active %}
+                {% if element.path_parameters is empty %}
+                    <a href="{{ path(element.path) }}">
+                {% else %}
+                    <a href="{{ pathForBreadcrumb(element.path, element.path_parameters) }}">
+                {% endif %}
+            {% endif %}
+
+            {% if element.title_parameters is empty %}
+                {{ element.title|trans }}
+            {% else %}
+                {{ titleForBreadcrumb(element.title, element.title_parameters) }}
+            {% endif %}
+
+            {% if not element.active %}</a>{% endif %}
+
+        </li>
+        {% endfor %}
+    </ol>
+{% endif %}

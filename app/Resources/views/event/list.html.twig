@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% import 'common/icons.html.twig' as icons %}
+
+{% set links_menu = [
+        { title: 'link.event_add'|trans, path: path('app_events_add') },
+    ]
+%}
+
+{% block body %}
+    <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+            <th>{{ 'table.code'|trans }}</th>
+            <th>{{ 'table.number_applications'|trans }}</th>
+            <th>{{ 'table.active_m'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td><a href="{{ path('app_events_edit', { 'id': event.id }) }}">{{ event.code }}</a></td>
+                <td>{{ event.applications|length }}</td>
+                <td>{{ icons.boolean(event.active) }}</td>
+            </tr>
+        {% else %}
+            <tr><th colspan="2">{{ 'table.no_element'|trans }}</th></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

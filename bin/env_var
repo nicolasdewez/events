@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+declare -A DEFAULTS
+
+# BDD
+DEFAULTS["BDD_EVENTS_HOST"]="db"
+DEFAULTS["BDD_EVENTS_PORT"]="5432"
+DEFAULTS["BDD_EVENTS_NAME"]="events"
+DEFAULTS["BDD_EVENTS_USER"]="events"
+DEFAULTS["BDD_EVENTS_PASSWORD"]=""
+
+# Checks if needed var already exists, and sets them with defaults if not
+for key in "${!DEFAULTS[@]}"; do
+    if [ -z "${!key}" ]; then
+        declare -x "$key"="${DEFAULTS[$key]}"
+    fi
+done

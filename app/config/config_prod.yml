@@ -1,0 +1,30 @@
+imports:
+    - { resource: config.yml }
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        send:
+            type: rotating_file
+            path: "%kernel.logs_dir%/send.log"
+            level: info
+            channels: [send]
+        admin:
+            type: rotating_file
+            path: "%kernel.logs_dir%/admin.log"
+            level: info
+            channels: [admin]
+        main_errors:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+        nested:
+            type: stream
+            path: "%kernel.logs_dir%/mainlog"
+        console:
+            type: console

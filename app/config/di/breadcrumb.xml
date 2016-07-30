@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter type="collection" key="breadcrumb">
+            <parameter type="collection" key="app_home">
+                <parameter type="string" key="title">breadcrumb.home</parameter>
+            </parameter>
+            <parameter type="collection" key="app_applications">
+                <parameter type="string" key="title">breadcrumb.applications</parameter>
+                <parameter type="string" key="parent">app_home</parameter>
+            </parameter>
+            <parameter type="collection" key="app_applications_add">
+                <parameter type="string" key="title">breadcrumb.add</parameter>
+                <parameter type="string" key="parent">app_applications</parameter>
+            </parameter>
+            <parameter type="collection" key="app_applications_edit">
+                <parameter type="string" key="title">{name}</parameter>
+                <parameter type="string" key="parent">app_applications</parameter>
+                <parameter type="collection" key="title_parameters">
+                    <parameter type="string" key="name">application.title</parameter>
+                </parameter>
+            </parameter>
+            <parameter type="collection" key="app_events">
+                <parameter type="string" key="title">breadcrumb.events</parameter>
+                <parameter type="string" key="parent">app_home</parameter>
+            </parameter>
+            <parameter type="collection" key="app_events_add">
+                <parameter type="string" key="title">breadcrumb.add</parameter>
+                <parameter type="string" key="parent">app_events</parameter>
+            </parameter>
+            <parameter type="collection" key="app_events_edit">
+                <parameter type="string" key="title">{name}</parameter>
+                <parameter type="string" key="parent">app_events</parameter>
+                <parameter type="collection" key="title_parameters">
+                    <parameter type="string" key="name">event.code</parameter>
+                </parameter>
+            </parameter>
+            <parameter type="collection" key="app_messages">
+                <parameter type="string" key="title">breadcrumb.messages</parameter>
+                <parameter type="string" key="parent">app_home</parameter>
+            </parameter>
+        </parameter>
+    </parameters>
+
+</container>

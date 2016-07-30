@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="app.decoder.event" class="AppBundle\Service\EventDecoder">
+            <argument type="service" id="serializer" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.loader.event" class="AppBundle\Service\EventLoader">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.manager.message" class="AppBundle\Service\MessageManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="finite.context" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.process.message" class="AppBundle\Service\MessageProcess">
+            <argument type="service" id="app.manager.message" />
+            <argument type="service" id="app.sender.event.sync" />
+            <argument type="service" id="app.sender.event.async" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.process.send" class="AppBundle\Service\SendProcess">
+            <argument type="service" id="app.loader.event" />
+            <argument type="service" id="app.process.message" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.connector.http" class="AppBundle\Service\Connector\HttpConnector" public="false">
+            <argument type="service" id="jms_serializer" />
+        </service>
+
+        <service id="app.connector.amqp" class="AppBundle\Service\Connector\AmqpConnector" public="false">
+            <argument type="service" id="jms_serializer" />
+            <argument type="string">%queue_host%</argument>
+            <argument type="string">%queue_port%</argument>
+            <argument type="string">%queue_user%</argument>
+            <argument type="string">%queue_password%</argument>
+        </service>
+
+        <service id="app.connector.mock" class="AppBundle\Service\Connector\MockConnector" public="false" />
+
+        <service id="app.sender.event.sync" class="AppBundle\Service\EventSender">
+            <argument type="service" id="app.connector.http" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.sender.event.async" class="AppBundle\Service\EventSender">
+            <argument type="service" id="app.connector.amqp" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+        <service id="app.event.publish" class="AppBundle\Service\PublishEvent">
+            <argument type="service" id="app.manager.message" />
+            <argument type="service" id="app.process.send" />
+            <argument type="service" id="app.decoder.event" />
+            <argument type="service" id="finite.context" />
+        </service>
+
+        <service id="app.consumer.abstract" class="AppBundle\Consumer\AbstractConsumer" abstract="true">
+            <call method="setConnector">
+                <argument type="service" id="app.connector.amqp" />
+            </call>
+        </service>
+
+        <service id="app.consumer.event" class="AppBundle\Consumer\EventConsumer" parent="app.consumer.abstract">
+            <argument type="service" id="app.decoder.event" />
+            <argument type="service" id="app.event.publish" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="send" />
+        </service>
+
+    </services>
+
+</container>

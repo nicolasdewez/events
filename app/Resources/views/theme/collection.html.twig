@@ -1,0 +1,24 @@
+{% block collection_row %}
+    {% import 'common/icons.html.twig' as macro %}
+
+    {{ form_label(form) }}  {{ macro.add }}
+    <div class="collection" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
+        {{ block('collection_widget') }}
+    </div>
+{% endblock collection_row %}
+
+{% block _event_applications_entry_application_label '' %}
+
+{% block _event_applications_entry_row %}
+    {% import 'common/icons.html.twig' as macro %}
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            {{ form_widget(form) }}
+        </div>
+        <div class="col-md-6 collection-actions">
+            {{ macro.delete }}
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock _event_applications_entry_row %}

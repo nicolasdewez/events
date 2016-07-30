@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% import 'common/icons.html.twig' as icons %}
+
+{% block body %}
+
+    {{ form(form) }}
+
+    {% if search.isSubmit %}
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>{{ 'table.id'|trans }}</th>
+                <th>{{ 'table.date'|trans }}</th>
+                <th>{{ 'table.event'|trans }}</th>
+                <th>{{ 'table.state'|trans }}</th>
+                <th>{{ 'table.details'|trans }}</th>
+                <th>{{ 'table.actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for message in messages %}
+                <tr>
+                    <td>#{{ message.id }}</td>
+                    <td>{{ message.date|date('d/m/Y H:i:s') }}</td>
+                    <td>{{ message.title }}</td>
+                    <td>
+                        {{ message.state }}
+                        {{ icons.details('#logsMessage' ~ message.id) }}
+                    </td>
+                    <td>
+                        {{ icons.details('#contentMessage' ~ message.id) }}
+                    </td>
+                    <td>
+                        {% if finite_can(message, constant('AppBundle\\Workflow\\MessageWorkflow::TRANS_MISSING_SEND')) %}
+                            {{ icons.missing_send(url('app_messages_resend_missing', {'id': message.id})) }}
+                        {% endif %}
+
+                        {% if finite_can(message, constant('AppBundle\\Workflow\\MessageWorkflow::TRANS_RESEND')) %}
+                            {{ icons.resend(url('app_messages_resend', {'id': message.id})) }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="collapse detailsElement" id="logsMessage{{ message.id }}">
+                    <td colspan="6">
+                        {% for log in message.logs %}
+                            <div>{{ log.date|date('d/m/Y H:i:s') }} - {{ log.state }}</div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr class="collapse detailsElement" id="contentMessage{{ message.id }}">
+                    <td colspan="6">
+                        <div>{{ message.namespace }}</div>
+                        <div>{{ message.payload }}</div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><th colspan="6">{{ 'table.no_element'|trans }}</th></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if  search.totalPages != 0 %}
+            <nav>
+                <ul class="pagination">
+                    <li{% if search.page == 1 %} class="disabled"{% endif %}><a rel="1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>
+                    <li{% if search.page == 1 %} class="disabled"{% endif %}><a rel="{{ search.page-1 }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+                    {# display p numbers only from p-4 to p+4 #}
+                    {% for p in range(max(search.page - 4, 1), min(search.page+4, search.totalPages)) %}
+                        <li{% if p == search.page %} class="active"{% endif %}><a rel="{{ p }}">{{ p }} <span class="sr-only">(current)</span></a></li>
+                    {% endfor %}
+
+                    <li{% if search.page == search.totalPages %} class="disabled"{% endif %}><a rel="{{ search.page+1 }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    <li{% if search.page == search.totalPages %} class="disabled"{% endif %}><a rel="{{ search.totalPages }}" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>
+                </ul>
+            </nav>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/message.js') }}"></script>
+{% endblock %}

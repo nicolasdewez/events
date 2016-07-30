@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Events{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% include 'common/menu.html.twig' %}
+        {% include 'common/breadcrumb.html.twig' %}
+        {% include 'common/flash.html.twig' %}
+
+        {% block body %}{% endblock %}
+        <div class="clear"></div>
+
+        {% include 'common/footer.html.twig' %}
+
+        <script type="text/javascript" src="{{ asset('js/jquery-1.12.3.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

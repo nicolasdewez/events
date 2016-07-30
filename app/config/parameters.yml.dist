@@ -1,0 +1,19 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: %%BDD_EVENTS_HOST%%
+    database_port: %%BDD_EVENTS_PORT%%
+    database_name: %%BDD_EVENTS_NAME%%
+    database_user: %%BDD_EVENTS_USER%%
+    database_password: %%BDD_EVENTS_PASSWORD%%
+
+    queue_host: rabbitmq
+    queue_port: 5672
+    queue_user: guest
+    queue_password: guest
+
+    call_mock: true
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt

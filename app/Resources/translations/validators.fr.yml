@@ -1,0 +1,2 @@
+application:
+    url: L'url est obligatoire lorsque le mode est asynchrone

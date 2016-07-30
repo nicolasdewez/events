@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+cd "`dirname "$0"`/.."
+
+source bin/env_var
+
+composer install --no-progress --no-interaction
+
+cp phinx.yml.dist phinx.yml
+
+# Replace in parameters.yml
+sed -i "s,%%BDD_EVENTS_HOST%%,$BDD_EVENTS_HOST,g" app/config/parameters.yml
+sed -i "s,'%%BDD_EVENTS_PORT%%',$BDD_EVENTS_PORT,g" app/config/parameters.yml
+sed -i "s,%%BDD_EVENTS_NAME%%,$BDD_EVENTS_NAME,g" app/config/parameters.yml
+sed -i "s,%%BDD_EVENTS_USER%%,$BDD_EVENTS_USER,g" app/config/parameters.yml
+sed -i "s,%%BDD_EVENTS_PASSWORD%%,$BDD_EVENTS_PASSWORD,g" app/config/parameters.yml
+
+# Replace in phinx.yml
+sed -i "s,%%BDD_EVENTS_HOST%%,$BDD_EVENTS_HOST,g" phinx.yml
+sed -i "s,%%BDD_EVENTS_PORT%%,$BDD_EVENTS_PORT,g" phinx.yml
+sed -i "s,%%BDD_EVENTS_NAME%%,$BDD_EVENTS_NAME,g" phinx.yml
+sed -i "s,%%BDD_EVENTS_USER%%,$BDD_EVENTS_USER,g" phinx.yml
+sed -i "s,%%BDD_EVENTS_PASSWORD%%,$BDD_EVENTS_PASSWORD,g" phinx.yml
+
+rm -rf var/cache/dev
+
+bin/console doctrine:database:create --if-not-exists
+vendor/bin/phinx migrate

@@ -1,0 +1,57 @@
+form:
+    username: Username
+    password: Password
+    connection: Log in
+    save: Save
+    search: Search
+    code: Code
+    title: Title
+    url: Url
+    active_m: Active
+    active_f: Active
+    events_type: Events type
+    asynchronous: Asynchronous (Queuing)
+    synchronous: Synchronous (API)
+    state:
+        no_applications: no_applications
+        partial: partial
+        sent: sent
+        error: error
+
+link:
+    logout: Log out
+    applications: Applications
+    events: Events
+    messages: Messages
+    application_add: Add application
+    event_add: Add event
+
+table:
+    no_element: No elements
+    actions: Actions
+    id: Id
+    code: Code
+    date: Date
+    event: Event
+    state: State
+    details: Details
+    title: Title
+    active_m: Active
+    active_f: Active
+    number_applications: Applications (nb)
+    events_type: Events type
+    asynchronous: Asynchronous (Queuing)
+    synchronous: Synchronous (API)
+
+breadcrumb:
+    home: Home
+    applications: Applications
+    events: Events
+    messages: Messages
+    add: Add
+
+notice:
+    application_added: Application added
+    application_updated: Application updated
+    event_added: Event added
+    event_updated: Event updated
