@@ -4,10 +4,10 @@ namespace AppBundle\Service\Connector;
 
 use AppBundle\Exception\ListenException;
 use AppBundle\Exception\SendException;
-use PhpAmqpLib\Exception\AMQPExceptionInterface;
 use JMS\Serializer\SerializerInterface;
 use Ndewez\EventsBundle\Model\Event;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Exception\AMQPExceptionInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
@@ -136,10 +136,10 @@ class AmqpConnector implements AmqpConnectorInterface
     /**
      * @param string $path
      *
-     * @return string mixed
+     * @return string
      */
     private function buildName($path)
     {
-        return $path;
+        return sprintf('%s', $path);
     }
 }

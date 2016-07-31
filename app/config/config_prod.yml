@@ -25,6 +25,6 @@ monolog:
             handler: nested
         nested:
             type: stream
-            path: "%kernel.logs_dir%/mainlog"
+            path: "%kernel.logs_dir%/main.log"
         console:
             type: console

@@ -83,7 +83,3 @@ finite_finite:
             new_try: { from: [partial_sent, error, no_applications], to: ready }  # New try, set to ready
             resend: { from: [partial_sent, error, no_applications], to: sent }    # Resend to all
             missing_send: { from: [partial_sent], to: sent }                      # Resend to missing
-
-# TO Delete
-ndewez_events:
-    mode: asynch

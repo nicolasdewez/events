@@ -13,7 +13,7 @@ use Ndewez\EventsBundle\Model\Event;
  */
 class HttpConnector implements ConnectorInterface
 {
-    const LISTEN_URL = '/api/listen';
+    const LISTEN_URL = '/events/listen';
 
     /** @var Client */
     private $client;

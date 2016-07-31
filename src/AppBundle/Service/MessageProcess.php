@@ -110,6 +110,6 @@ class MessageProcess
 
         $this->logger->debug(sprintf('Send event "%s" in mode "%s"', $event->getTitle(), Application::TYPE_ASYNC));
 
-        return $this->senderAsync->send($event, $event->getTitle());
+        return $this->senderAsync->send($event, $application->getCode());
     }
 }

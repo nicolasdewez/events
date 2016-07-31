@@ -41,7 +41,7 @@ class AdminListener
         }
 
         $url = $event->getRequest()->getPathInfo();
-        if (!preg_match('#^/(application|event)#', $url)) {
+        if (!preg_match('#^/(application|event)/#', $url)) {
             return;
         }
 
