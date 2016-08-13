@@ -1,0 +1,6 @@
+AppBundle\Entity\Users:
+    ndewez:
+        username: ndewez
+        password: $2y$13$xCnyFtnlbow9lOKIn0MTNe1I9s.AuBeNXEG42lZ12fW0cY2kXdOlm
+        firstName: Nicolas
+        lastName: Dewez

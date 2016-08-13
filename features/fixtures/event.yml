@@ -1,0 +1,3 @@
+AppBundle\Entity\Event:
+    event:
+        code: 'myEvent'

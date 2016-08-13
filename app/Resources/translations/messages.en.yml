@@ -12,6 +12,8 @@ form:
     events_type: Events type
     asynchronous: Asynchronous (Queuing)
     synchronous: Synchronous (API)
+    add_element: Add element
+    delete_element: Delete element
     state:
         no_applications: no_applications
         partial: partial

@@ -58,14 +58,28 @@ pgsql: ## Run pgsql cli
 	@$(COMPOSE) exec $(DB) psql $(DB_NAME) -U events
 
 .PHONY: test
-test: phpunit ## Run all tests
+test: phpunit behat ## Run all tests
 
 .PHONY: phpunit
-phpunit: ## Run phpunit test suite
-	@$(COMPOSE) run --rm -e DEBUG=$(DEBUG) $(APP) vendor/bin/phpunit
+phpunit: ## Run phpunit test suite (options: filter=myfilter)
+ifndef filter
+	$(eval flt = )
+else
+	$(eval flt = --filter $(filter))
+endif
+	@$(COMPOSE) run --rm -e DEBUG=$(DEBUG) $(APP) vendor/bin/phpunit $(flt)
+
+.PHONY: behat
+behat: ## Run behat test suite (options: path=mypath)
+ifndef path
+	$(eval pth = )
+else
+	$(eval pth = features/$(path))
+endif
+	@$(COMPOSE) run --rm -e DEBUG=$(DEBUG) $(APP) vendor/bin/behat $(pth)
 
 .PHONY: run
-run: ## Execute a command in a container (options: user=www-data, cont=app, cmd="pwd"])
+run: ## Execute a command in a container (options: user=www-data, cont=app, cmd="pwd")
 	$(eval user ?= www-data)
 	$(eval cont ?= $(APP))
 ifndef cmd

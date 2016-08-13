@@ -1,0 +1,17 @@
+AppBundle\Entity\Application:
+    app1:
+        code: 'APP 1'
+        title: 'Application 1'
+        url: ''
+        eventsType: 'asynchronous'
+
+    app2:
+        code: 'APP 2'
+        title: 'Application 2'
+        url: 'http://localhost'
+        eventsType: 'synchronous'
+
+AppBundle\Entity\Event:
+    event:
+        code: 'myEvent'
+        applications: ['@app1', '@app2']

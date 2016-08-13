@@ -1,7 +1,58 @@
 default:
+    suites:
+        default:
+            contexts:
+                - FeatureContext: ~
+                - Fidry\AliceBundleExtension\Context\Doctrine\AliceORMContext:
+                    basePath: "%paths.base%/features/fixtures"
+                - Behat\MinkExtension\Context\MinkContext: ~
+                - Knp\FriendlyContexts\Context\TableContext: ~
+                - Knp\FriendlyContexts\Context\ApiContext: ~
+            filters:
+                tags: "~@javascript"
+
+        firefox:
+            mink_javascript_session: firefox
+            contexts:
+                - FeatureContext: ~
+                - Fidry\AliceBundleExtension\Context\Doctrine\AliceORMContext:
+                    basePath: "%paths.base%/features/fixtures"
+                - Behat\MinkExtension\Context\MinkContext: ~
+                - Knp\FriendlyContexts\Context\TableContext: ~
+            filters:
+                tags: "@javascript"
+
+        chrome:
+            mink_javascript_session: chrome
+            contexts:
+                - FeatureContext: ~
+                - Fidry\AliceBundleExtension\Context\Doctrine\AliceORMContext:
+                    basePath: "%paths.base%/features/fixtures"
+                - Behat\MinkExtension\Context\MinkContext: ~
+                - Knp\FriendlyContexts\Context\TableContext: ~
+            filters:
+                tags: "@javascript"
+
     extensions:
+        Fidry\AliceBundleExtension\Extension:
+            fixtures_base_path: ~
+        Knp\FriendlyContexts\Extension:
+            api:
+                base_url: "http://events.local/app_dev.php"
         Behat\Symfony2Extension: ~
         Behat\MinkExtension:
-            goutte: ~
-            selenium2: ~
-            base_url: http://events.local/app_dev.php
+            base_url: "http://events.local/app_dev.php"
+            show_auto: true
+            show_cmd: 'chrome %s'
+            sessions:
+                default:
+                    goutte: ~
+                chrome:
+                    selenium2:
+                        wd_host: "http://chrometesting.local:5555/wd/hub"
+                        browser: chrome
+                firefox:
+                    selenium2:
+                        wd_host: "http://firefoxtesting.local:5555/wd/hub"
+                        browser: firefox
+

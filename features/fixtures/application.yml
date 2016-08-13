@@ -1,0 +1,6 @@
+AppBundle\Entity\Application:
+    app1:
+        code: 'APP 1'
+        title: 'Application 1'
+        url: ''
+        eventsType: 'asynchronous'

@@ -7,7 +7,7 @@
 {% endmacro %}
 
 {% macro link (href, rel, class, target, title, collapse_id) %}
-    <a href="{{ href|default('#') }}" rel="{{ rel|default('') }}" title="{{ title|default('') }}" target="{{ target|default('_self') }}"><span class="{{ class|default('') }}"></span>{% if title is defined %} {{ title }}{% endif %}</a>
+    <a href="{{ href|default('#') }}" rel="{{ rel|default('') }}" title="{{ title|default('') }}" target="{{ target|default('_self') }}"><span class="{{ class|default('') }}"></span></a>
 {% endmacro %}
 
 {% macro view (path, target, title) %}

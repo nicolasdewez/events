@@ -1,7 +1,7 @@
 {% block collection_row %}
     {% import 'common/icons.html.twig' as macro %}
 
-    {{ form_label(form) }}  {{ macro.add }}
+    {{ form_label(form) }}  {{ macro.add('form.add_element'|trans) }}
     <div class="collection" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
         {{ block('collection_widget') }}
     </div>
@@ -17,7 +17,7 @@
             {{ form_widget(form) }}
         </div>
         <div class="col-md-6 collection-actions">
-            {{ macro.delete }}
+            {{ macro.delete('form.delete_element'|trans) }}
         </div>
         <div class="clear"></div>
     </div>
