@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d16f42a43a72dd98d95b82da1a7c724",
+    "hash": "49c706e1d9f2dfeee5650fb7b817aeeb",
     "content-hash": "7d86abd3d62c191c9c12283a336562ee",
     "packages": [
         {
@@ -1362,12 +1362,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nicolasdewez/events-bundle.git",
-                "reference": "5c7398d75958c5aa9e635487b713f4a7efa2ded3"
+                "reference": "d67dbae743320bd0f434a770c5c58aacdece237b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicolasdewez/events-bundle/zipball/5c7398d75958c5aa9e635487b713f4a7efa2ded3",
-                "reference": "5c7398d75958c5aa9e635487b713f4a7efa2ded3",
+                "url": "https://api.github.com/repos/nicolasdewez/events-bundle/zipball/d67dbae743320bd0f434a770c5c58aacdece237b",
+                "reference": "d67dbae743320bd0f434a770c5c58aacdece237b",
                 "shasum": ""
             },
             "require": {

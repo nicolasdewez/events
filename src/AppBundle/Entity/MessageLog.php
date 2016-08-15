@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use AppBundle\Workflow\MessageWorkflow as Workflow;
 use Doctrine\ORM\Mapping as ORM;
-use Finite\StatefulInterface;
 
 /**
  * Messages

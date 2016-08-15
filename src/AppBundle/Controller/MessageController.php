@@ -8,11 +8,8 @@ use AppBundle\Exception\EventNotFoundException;
 use AppBundle\Exception\WorkflowTransitionException;
 use AppBundle\Form\Model\MessageSearch;
 use AppBundle\Form\Type\MessageSearchType;
-use AppBundle\Workflow\MessageWorkflow as Workflow;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

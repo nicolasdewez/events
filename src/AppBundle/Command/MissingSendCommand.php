@@ -2,8 +2,6 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Exception\WorkflowTransitionException;
-use AppBundle\Workflow\MessageWorkflow as Workflow;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

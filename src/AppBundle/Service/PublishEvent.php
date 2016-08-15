@@ -6,8 +6,6 @@ use AppBundle\Entity\Message;
 use AppBundle\Exception\WorkflowTransitionException;
 use AppBundle\Workflow\MessageWorkflow as Workflow;
 use Finite\Context;
-use Ndewez\EventsBundle\Model\Event;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PublishEvent.

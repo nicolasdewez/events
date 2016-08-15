@@ -4,10 +4,7 @@ namespace AppBundle\Consumer;
 
 use AppBundle\Exception\AppException;
 use AppBundle\Exception\EventNotFoundException;
-use AppBundle\Service\EventDecoder;
-use AppBundle\Service\MessageManager;
 use AppBundle\Service\PublishEvent;
-use AppBundle\Service\SendProcess;
 use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LoggerInterface;
 
@@ -16,9 +13,6 @@ use Psr\Log\LoggerInterface;
  */
 class EventConsumer extends AbstractConsumer
 {
-    /** @var EventDecoder */
-    private $decoder;
-
     /** @var PublishEvent */
     private $publish;
 
@@ -26,13 +20,11 @@ class EventConsumer extends AbstractConsumer
     private $logger;
 
     /**
-     * @param EventDecoder    $decoder
      * @param PublishEvent    $publish
      * @param LoggerInterface $logger
      */
-    public function __construct(EventDecoder $decoder, PublishEvent $publish, LoggerInterface $logger)
+    public function __construct(PublishEvent $publish, LoggerInterface $logger)
     {
-        $this->decoder = $decoder;
         $this->publish = $publish;
         $this->logger = $logger;
     }

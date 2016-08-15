@@ -80,7 +80,6 @@
         </service>
 
         <service id="app.consumer.event" class="AppBundle\Consumer\EventConsumer" parent="app.consumer.abstract">
-            <argument type="service" id="app.decoder.event" />
             <argument type="service" id="app.event.publish" />
             <argument type="service" id="logger" />
             <tag name="monolog.logger" channel="send" />

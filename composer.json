@@ -1,5 +1,6 @@
 {
     "name": "ndewez/events",
+    "description": "Events exchange application",
     "license": "proprietary",
     "type": "project",
     "autoload": {
