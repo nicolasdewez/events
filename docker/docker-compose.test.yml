@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+    selenium:
+        image: selenium/hub
+        ports:
+            - 4444:4444
+        networks:
+            local:
+                aliases:
+                    - selenium
+            default:
+                aliases:
+                    - selenium.local
+    chromenode:
+        image: selenium/node-chrome-debug
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=selenium
+            - HUB_PORT_4444_TCP_PORT=4444
+
+        ports:
+            # Port is used for VNC only
+            - 5900:5900
+        networks:
+            local:
+                aliases:
+                    - chromenode
+            default:
+                aliases:
+                    - chromenode.local
+
+    firefoxnode:
+        image: selenium/node-firefox-debug
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=selenium
+            - HUB_PORT_4444_TCP_PORT=4444
+        ports:
+            # Port is used for VNC only
+            - 5901:5900
+        networks:
+            local:
+                aliases:
+                    - firefoxnode
+            default:
+                aliases:
+                    - firefoxnode.local

@@ -30,7 +30,7 @@
         "jms/serializer-bundle": "^1.1",
         "robmorgan/phinx": "^0.6.2",
         "videlalvaro/php-amqplib": "^2.6",
-        "nicolasdewez/events-bundle": "dev-master",
+        "nicolasdewez/events-bundle": "^1.0",
         "yohang/finite": "^1.1"
     },
     "require-dev": {

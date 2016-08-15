@@ -58,7 +58,7 @@ services:
                 aliases:
                     - db.local
         volumes:
-            - ./containers/db:/usr/local/src
+            - ./docker/db:/usr/local/src
 
     rabbitmq:
         image: rabbitmq:3-management
@@ -72,38 +72,3 @@ services:
             default:
                 aliases:
                     - rabbitmq.local
-
-    hubtesting:
-        image: selenium/hub:2.52.0
-        ports:
-            - 4444:4444
-
-    chrometesting:
-        image: selenium/node-chrome-debug:2.48.2
-        environment:
-            - HUB_PORT_4444_TCP_ADDR=hubtesting
-        ports:
-            # Port is used for VNC only
-            - 5900:5900
-        networks:
-            local:
-                aliases:
-                    - chrometesting
-            default:
-                aliases:
-                    - chrometesting.local
-
-    firefoxtesting:
-        image: selenium/node-firefox-debug:2.48.2
-        environment:
-            - HUB_PORT_4444_TCP_ADDR=hubtesting
-        ports:
-            # Port is used for VNC only
-            - 5901:5900
-        networks:
-            local:
-                aliases:
-                    - firefoxtesting
-            default:
-                aliases:
-                    - firefoxtesting.local

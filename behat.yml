@@ -49,10 +49,10 @@ default:
                     goutte: ~
                 chrome:
                     selenium2:
-                        wd_host: "http://chrometesting.local:5555/wd/hub"
+                        wd_host: "http://chromenode.local:5555/wd/hub"
                         browser: chrome
                 firefox:
                     selenium2:
-                        wd_host: "http://firefoxtesting.local:5555/wd/hub"
+                        wd_host: "http://firefoxnode.local:5555/wd/hub"
                         browser: firefox
 
