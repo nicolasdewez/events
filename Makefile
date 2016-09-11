@@ -9,10 +9,11 @@ APP = app
 WEB = web
 DB = db
 RABBITMQ = rabbitmq
-DB_NAME = events
+ELK = elk
 SELENIUM = selenium
 CHROME = chromenode
 FIREFOX = firefoxnode
+DB_NAME = events
 
 DOCKER = docker
 DOCKER_BUILD = $(DOCKER) build -t
@@ -40,25 +41,41 @@ PRINT = PRINT_CLASSIC
 #################################
 
 CONFIG_STANDALONE = -f docker-compose.yml
+CONFIG_DEV = $(CONFIG_STANDALONE) -f docker/docker-compose.dev.yml
 CONFIG_TEST = $(CONFIG_STANDALONE) -f docker/docker-compose.test.yml
+CONFIG_COMPLETE = $(CONFIG_DEV) -f docker/docker-compose.test.yml
 
 # Default
-CONFIG = $(CONFIG_TEST)
+CONFIG = $(CONFIG_COMPLETE)
+CONFIG_TITLE = complete
 
 .PHONY: standalone
 standalone: ## Use "standalone" profile
 	$(eval CONFIG = $(CONFIG_STANDALONE))
+	$(eval CONFIG_TITLE = standalone)
+	@true
+
+.PHONY: dev
+dev: ## Use "dev" profile
+	$(eval CONFIG = $(CONFIG_DEV))
+	$(eval CONFIG_TITLE = dev)
 	@true
 
 .PHONY: test
 test: ## Use "test" profile
 	$(eval CONFIG = $(CONFIG_TEST))
+	$(eval CONFIG_TITLE = test)
+	@true
+
+.PHONY: complete
+complete: ## Use "complete" profile
+	$(eval CONFIG = $(CONFIG_COMPLETE))
+	$(eval CONFIG_TITLE = complete)
 	@true
 
 #################################
 # Targets
 #################################
-
 .PHONY: behat
 behat: ## Run behat test suite (options: path=mypath)
 ifndef path
@@ -154,8 +171,8 @@ start: pretty network up install ## Start containers & install application
 stop: pretty ## Stop containers
 	@$(COMPOSE) stop $(app) 2>&1 | $(call $(PRINT),STOP,$(COLOR_INSTALL))
 
-.PHONY: test
-test: readytest phpunit behat ## Run all tests
+.PHONY: tests
+tests: phpunit behat ## Run all tests
 
 .PHONY: up
 up: ## Builds, (re)creates, starts containers

@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    elk:
+        image: willdurand/elk
+        ports:
+            - "8080:80"
+        networks:
+            local:
+                aliases:
+                    - elk
+            default:
+                aliases:
+                    - elk.local
+        volumes:
+            - ./docker/elk/logstash:/etc/logstash
+        volumes_from:
+            - web

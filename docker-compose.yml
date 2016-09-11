@@ -39,12 +39,12 @@ services:
                     - web.local
         environment:
             - FPM_HOST=app
+        volumes:
+            - ./var/logs/nginx/:/var/log/nginx
         depends_on:
             - app
         volumes_from:
             - app
-        volumes:
-            - ./var/logs/nginx:/var/log/nginx
 
     db:
         image: postgres:9.5
